@@ -1,6 +1,8 @@
 package link;
 
 /**
+ * Link context types.
+ * 
  * @author Dilendra Sajini
  *
  * @since Dec 23, 2021

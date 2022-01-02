@@ -1,6 +1,8 @@
 package link;
 
 /**
+ * Contains context related information to generate {@link LinkData} from {@link LinkDataGeneratorFactory}
+ * 
  * @author Dilendra Sajini
  *
  * @since Dec 23, 2021
@@ -13,10 +15,12 @@ public class LinkContext
   
   private String[] arguments;
   
-  private boolean isRejectedRequest;
-  
   private String resourceString;
   
+  /**
+   * Get link context type.
+   * @return {@link LinkContextType} 
+   */
   public LinkContextType getType()
   {
     return type;
@@ -27,6 +31,10 @@ public class LinkContext
     this.type = type;
   }
 
+  /**
+   * Argument id list to opening the reference.
+   * @return String[] of arguments
+   */
   public String[] getArguments()
   {
     return arguments;
@@ -42,21 +50,20 @@ public class LinkContext
     return speciality;
   }
 
+  /**
+   * Speciality number.
+   * @return String[] of arguments
+   */
   public void setSpeciality(int speciality)
   {
     this.speciality = speciality;
   }
 
-  public boolean isRejectedRequest()
-  {
-    return isRejectedRequest;
-  }
-
-  public void setRejectedRequest(boolean isRejectedRequest)
-  {
-    this.isRejectedRequest = isRejectedRequest;
-  }
-
+  /**
+   * Resource string value specific to bundle.
+   * Use to generate ReferenceName in link data {@link LinkData}.
+   * @return String
+   */
   public String getResourceString()
   {
     return resourceString;

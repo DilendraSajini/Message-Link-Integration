@@ -2,6 +2,8 @@ package link;
 
 
 /**
+ * Contains shareable pathology report link related module reference data.
+ * 
  * @author Dilendra Sajini
  *
  * @since Dec 28, 2021

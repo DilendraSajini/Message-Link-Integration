@@ -1,7 +1,8 @@
 package link;
 
-
 /**
+ * Contains shareable results link related module reference data.
+ * 
  * @author Dilendra Sajini
  *
  * @since Dec 27, 2021
@@ -22,7 +23,7 @@ public class ResultLinkData extends LinkData
   @Override
   public String getReferenceName()
   {
-    return context.getResourceString() + " " + Constants.PATHOLOGY_CYTOLOGY_SPECIALITY;
+	  return context.getResourceString() + " " + Constants.PATHOLOGY_CYTOLOGY_SPECIALITY;
   }
 
 }

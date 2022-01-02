@@ -1,12 +1,21 @@
 package link;
 
 /**
+ * Factroy to generate link related module reference data based on the context.
+ *  
  * @author Dilendra Sajini
  *
  * @since Dec 23, 2021
  */
 public class LinkDataGeneratorFactory
 {
+  /**
+   * Get link data generator by link context.
+   * 
+   * @param LinkContext {@link LinkContext} 
+   *
+   * @return {@link LinkData} 
+   */
   public LinkData generate(LinkContext context)
   {
     if (context.getType() == LinkContextType.REPORT)
@@ -27,6 +36,10 @@ public class LinkDataGeneratorFactory
 
   private ReportLinkData getReportLinkData(LinkContext context)
   {
+    if (context.getSpeciality() == 0)
+    {
+      throw new IllegalArgumentException("Context speciality should be valid");
+    }
     if (context.getSpeciality() == Constants.NEW_REFERRAL_REFERREL)
     {
       return new ReferralReportLinkData(context);

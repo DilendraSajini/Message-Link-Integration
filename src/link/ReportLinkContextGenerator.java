@@ -8,63 +8,71 @@
 //import se.cambiosys.client.ros.inbox.common.data.dataprovider.OMInboxDataProvider;
 //import se.cambiosys.client.ros.inbox.common.data.dataprovider.OMInboxItemDataService;
 //
-///**
-// * @author Dilendra Sajini
-// *
-// * @since Dec 23, 2021
-// */
-//public class ReportLinkContextGenerator implements LinkContextGenerator<ClientInboxItem> {
+/**
+ * Generate report specific context data{@link LinkContext} 
+ * 
+ * @author Dilendra Sajini
+ *
+ * @since Dec 23, 2021
+ */
+//public class ReportLinkContextGenerator implements LinkContextGenerator
+//{
 //
-//	private ClientInboxItem inboxItem;
+//  protected ClientInboxItem inboxItem;
 //
-//	private OMInboxItemDataService omInboxDataProvider;
+//  private OMInboxItemDataService omInboxDataProvider;
 //
-//	public ReportLinkContextGenerator(ClientInboxItem inboxItem) {
-//		this.inboxItem = inboxItem;
-//		this.omInboxDataProvider = OMInboxDataProvider.getInstance();
-//	}
+//  public ReportLinkContextGenerator(ClientInboxItem inboxItem)
+//  {
+//    this.inboxItem = inboxItem;
+//    this.omInboxDataProvider = OMInboxDataProvider.getInstance();
+//  }
 //
-//	public LinkContext generate() {
-//		LinkContext linkContext = new LinkContext();
-//		if (inboxItem != null) {
-//			linkContext.setType(LinkContextType.REPORT);
-//			linkContext.setSpeciality(inboxItem.getSpecialityNumber());
-//			linkContext.setArguments(getArguments());
-//			// linkContext.setReferral(inboxItem instanceof ReferralClientInboxItem);
-//			if (inboxItem instanceof ReferralClientInboxItem) {
-//				linkContext.setRejectedRequest(((ReferralClientInboxItem) inboxItem).isRequestRejected());
-//			}
-//			linkContext.setResourceString(LanguageToolkit.getResourceBundle(RoSConstants.LANGUAGE_RESULT_INBOX, true)
-//					.getResourceString("NewMessageReferece.rr"));
-//		}
-//		return linkContext;
-//	}
+//  /**
+//   * Generate link context
+//   * @return {@link LinkContext} 
+//   */
+//  public LinkContext generate()
+//  {
+//    LinkContext linkContext = new LinkContext();
+//    if (inboxItem != null && inboxItem.getVersionedId() != null)
+//    {
+//      linkContext.setType(LinkContextType.REPORT);
+//      linkContext.setSpeciality(inboxItem.getSpecialityNumber());
+//      linkContext.setArguments(getArguments());
+//      linkContext.setResourceString(getResourceString());
+//    }
+//    return linkContext;
+//  }
 //
-//	private String[] getArguments() {
-//		String[] arguments = null;
-//		if (inboxItem instanceof ReferralClientInboxItem) {
-//			ReferralClientInboxItem referralClientInboxItem = (ReferralClientInboxItem) inboxItem;
-//			String attestableTypeName = referralClientInboxItem.getAttestable().getType().name();
-//			String id = referralClientInboxItem.isRequestRejected() ? referralClientInboxItem.getRequestId()
-//					: referralClientInboxItem.getAttestable().getId();
-//			String paientId = referralClientInboxItem.getAttestable().getPatient();
-//			arguments = new String[] { attestableTypeName, id, paientId };
-//		} else {
-//			if (inboxItem != null && inboxItem.getSpecialityNumber() == RoSConstants.SPECIALITY_PATHOLOGY_CYTOLOGY) {
-//				arguments = new String[] { inboxItem.getReportId() };
-//			} else {
-//				arguments = new String[] { getNotificationID(inboxItem) };
-//			}
-//		}
-//		return arguments;
-//	}
+//  /**
+//   * Argument id list to opening the reference.
+//   * @return String[] 
+//   */
+//  protected String[] getArguments()
+//  {
+//    if (inboxItem != null && inboxItem.getResults() != null && inboxItem.getNumberOfResults() > 0)
+//    {
+//      ClientRequest request = omInboxDataProvider.getRequest(inboxItem.getResultItem(0).getRequestID());
+//      return new String[] { request.getID() };
+//    }
+//    return new String[] {};
+//  }
 //
-//	private String getNotificationID(ClientInboxItem inboxItem) {
-//		if (inboxItem != null && inboxItem.getNumberOfResults() > 0) {
-//			ClientRequest request = omInboxDataProvider.getRequest(inboxItem.getResultItem(0).getRequestID());
-//			return request.getID();
-//		}
-//		return null;
-//	}
-//
+//  /**
+//   * Resource string value specific to bundle.
+//   * Use to generate ReferenceName in link data {@link LinkData}.
+//   * @return String
+//   */
+//  protected String getResourceString()
+//  {
+//    String resourceString = LanguageToolkit.getResourceBundle(RoSConstants.LANGUAGE_RESULT_INBOX, true)
+//        .getResourceString("NewMessageReferece.rr");
+//    if (inboxItem != null && inboxItem.getResults() != null && inboxItem.getNumberOfResults() > 0)
+//    {
+//      String resultTestTime = inboxItem.getResultItem(0).getTestTimeActual();
+//      return resourceString + LinkUtils.getSuffixDateString(resultTestTime);
+//    }
+//    return resourceString;
+//  }
 //}

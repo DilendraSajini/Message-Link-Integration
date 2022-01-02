@@ -1,6 +1,8 @@
 package link;
 
 /**
+ * Contains shareable referral report link related module reference data.
+ * 
  * @author Dilendra Sajini
  *
  * @since Dec 28, 2021
@@ -21,8 +23,7 @@ public class ReferralReportLinkData extends ReportLinkData
   @Override
   public String getReferenceName()
   {
-    return context.isRejectedRequest() ? Constants.MESSAGE_LINK_TEXT_REFERRAL
-        : Constants.MESSAGE_LINK_TEXT_ANSWER;
+    return context.getResourceString();
   }
 
   @Override
