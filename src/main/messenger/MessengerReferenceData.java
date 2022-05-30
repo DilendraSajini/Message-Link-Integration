@@ -1,6 +1,6 @@
-package app.messenger;
+package main.messenger;
 
-import app.data.LinkData;
+import app.link.data.LinkData;
 
 public class MessengerReferenceData implements MessengerReferenceDataInterface {
 	private LinkData linkData;
@@ -11,7 +11,7 @@ public class MessengerReferenceData implements MessengerReferenceDataInterface {
 
 	@Override
 	public String getMessageLinkBase() {
-		return linkData.getService() + "_" + linkData.getReferenceName() + "_" + linkData.getModule();
+		return linkData.getModule() + "_" + linkData.getReferenceName() + "_" + linkData.getService();
 	}
 
 	@Override

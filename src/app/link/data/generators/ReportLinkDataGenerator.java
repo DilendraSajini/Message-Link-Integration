@@ -1,9 +1,9 @@
-package app.data.generators;
+package app.link.data.generators;
 
 import app.common.constants.SpecialityConstants;
-import app.context.LinkContext;
-import app.data.PathologyReportLinkData;
-import app.data.ReportLinkData;
+import app.link.context.LinkContext;
+import app.link.data.PathologyReportLinkData;
+import app.link.data.ReportLinkData;
 
 /**
  * Generate link data{@link ReportLinkData}
@@ -12,9 +12,7 @@ import app.data.ReportLinkData;
  *
  * @since Jan 5, 2022
  */
-public class ReportLinkDataGenerator implements LinkDataGenerator {
-
-	private LinkContext linkContext;
+public class ReportLinkDataGenerator extends LinkDataGenerator {
 
 	public ReportLinkDataGenerator(LinkContext linkContext) {
 		super();

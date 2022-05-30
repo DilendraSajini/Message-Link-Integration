@@ -1,6 +1,8 @@
 package app.common.constants;
 
 public class SpecialityConstants {
+	private SpecialityConstants() {
+	}
 
 	public static final int SPECIALITY_PATHOLOGY_CYTOLOGY = 3;
 	public static final int SPECIALITY_CHEMISTRY = 1;

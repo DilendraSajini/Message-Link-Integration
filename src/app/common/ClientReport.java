@@ -24,14 +24,28 @@ public class ClientReport {
 		return data;
 	}
 
+	public void setVersionedId(String versionedId) {
+		this.versionedId = versionedId;
+	}
+
+	public void setSpecialityNumber(int specialityNumber) {
+		this.specialityNumber = specialityNumber;
+	}
+
+	public void setData(ReportData data) {
+		this.data = data;
+	}
+
+	public void setReportId(String reportId) {
+		this.reportId = reportId;
+	}
+
+	public void setResults(ClientResult[] results) {
+		this.results = results;
+	}
+
 	public boolean isValid() {
-		ReportData data = this.getData();
-		if (data.id != null && data.id.equals("")) {
-			return false;
-		} else if (data.soc == null) {
-			return false;
-		}
-		return true;
+		return this.getData().isValid();
 	}
 
 	public String getReportId() {

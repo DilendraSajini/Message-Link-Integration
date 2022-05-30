@@ -1,7 +1,7 @@
-package app.data.generators;
+package app.link.data.generators;
 
-import app.context.LinkContext;
-import app.data.LinkData;
+import app.link.context.LinkContext;
+import app.link.data.LinkData;
 
 /**
  * Provide link data generator that generates link related reference data based on the context.

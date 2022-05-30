@@ -1,7 +1,7 @@
-package app.data;
+package app.link.data;
 
 import app.common.constants.ServiceNameConstants;
-import app.context.LinkContext;
+import app.link.context.LinkContext;
 
 /**
  * Contains shareable pathology report link related reference data.

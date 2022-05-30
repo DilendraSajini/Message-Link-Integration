@@ -1,4 +1,4 @@
-package app.messenger;
+package main.messenger;
 
 public interface MessengerReferenceDataInterface {
 

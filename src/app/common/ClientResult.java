@@ -25,4 +25,28 @@ public class ClientResult {
 	public String getTestTimeActual() {
 		return testTimeActual;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public String getRequestId() {
+		return requestId;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setRequestId(String requestId) {
+		this.requestId = requestId;
+	}
+
+	public void setSpeciality(int speciality) {
+		this.speciality = speciality;
+	}
+
+	public void setTestTimeActual(String testTimeActual) {
+		this.testTimeActual = testTimeActual;
+	}
 }
