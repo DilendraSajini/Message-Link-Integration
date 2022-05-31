@@ -13,7 +13,6 @@ import app.common.toolkit.LanguageToolkit;
 import app.link.context.LinkContext;
 import app.link.context.LinkContextType;
 import app.link.context.LinkUtils;
-import app.link.context.LinkContext.LinkContextBuilder;
 
 /**
  * Generate context data{@link LinkContext}
@@ -24,42 +23,62 @@ import app.link.context.LinkContext.LinkContextBuilder;
  */
 public final class LinkContextHelper {
 
+	public static final String CORRUPTED_RESULT = "CorruptedResult.rr";
+
+	public static final String CORRUPTED_REPORT = "CorruptedReport.rr";
+
 	private LinkContextHelper() {
 
 	}
 
 	/**
-	 * Generate link context using ClientResult Not supported for pathology hence
-	 * report id is not available with results use
-	 * {@link #buildLinkContext(ClientInboxItem inboxItem)}
+	 * Generate link context using ClientResult
 	 * 
 	 * @return {@link LinkContext}
 	 * @throws ClientException
 	 */
 	public static LinkContext buildLinkContext(ClientResult result) throws ClientException {
 		if (!isValidRequestId(result)) {
-			throwsClientException(LanguageToolkit.language("CorruptedResult.rr"));
+			throwsClientException(LanguageToolkit.language(CORRUPTED_RESULT));
 		}
 		return new LinkContext.LinkContextBuilder(LinkContextType.REPORT, result.getSpeciality())
 				.requestId(result.getRequestID()).timeStamp(getTimeStamp(result)).build();
 	}
 
+	/**
+	 * Generate link context using ClientResult, ClientReport
+	 * 
+	 * @return {@link LinkContext}
+	 * @throws ClientException
+	 */
 	public static LinkContext buildLinkContext(ClientReport clientReport, ClientResult clientResult) {
 		return new LinkContext.LinkContextBuilder(LinkContextType.REPORT, clientReport.getSpecialityNumber())
 				.reportId(clientReport.getReportId()).timeStamp(getTimeStamp(clientResult)).build();
 	}
 
+	/**
+	 * Generate link context using multiple ClientResult
+	 * 
+	 * @return {@link LinkContext}
+	 * @throws ClientException
+	 */
 	public static LinkContext buildLinkContext(List<ClientResult> clientResults) throws ClientException {
 		if (!isValidResultIds(clientResults)) {
-			throwsClientException(LanguageToolkit.language("CorruptedResult.rr"));
+			throwsClientException(LanguageToolkit.language(CORRUPTED_RESULT));
 		}
 		return new LinkContext.LinkContextBuilder(LinkContextType.RESULT, clientResults.get(0).getSpeciality())
 				.resultIds(getResultIds(clientResults)).timeStamp(getTimeStamp(clientResults)).build();
 	}
 
+	/**
+	 * Generate link context using ClientReport
+	 * 
+	 * @return {@link LinkContext}
+	 * @throws ClientException
+	 */
 	public static LinkContext buildLinkContext(ClientReport clientReport) throws ClientException {
 		if (!isValidClientReport(clientReport)) {
-			throwsClientException(LanguageToolkit.language("CorruptedReport.rr"));
+			throwsClientException(LanguageToolkit.language(CORRUPTED_REPORT));
 		}
 		return buildLinkContextByReportResults(clientReport);
 	}
@@ -68,7 +87,7 @@ public final class LinkContextHelper {
 		List<ClientResult> clientResults = clientReport.getResults() != null ? Arrays.asList(clientReport.getResults())
 				: new ArrayList<>();
 		if (!isValidResults(clientResults)) {
-			throwsClientException(LanguageToolkit.language("CorruptedResult.rr"));
+			throwsClientException(LanguageToolkit.language(CORRUPTED_RESULT));
 		}
 		return buildLinkContext(clientResults.get(0));
 	}

@@ -21,6 +21,7 @@ public class Main {
 	public static final String MODULE_NAME = "ModuleName.rr";
 	public static final Locale currentLocale = Locale.GERMAN;
 	public static final Locale swedishLocale = new Locale("sv", "SE");
+
 	public static void main(String[] args) {
 		try {
 			LinkContext reportContext = LinkContextHelper.buildLinkContext(getClientReport());
